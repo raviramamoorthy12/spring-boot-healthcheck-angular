@@ -1,0 +1,42 @@
+{
+	"healthChecks": [
+		{
+			"name": "OneCognizant",
+			"direction": "Source",
+			"url": "https://onecognizant.cognizant.com",
+			"secure": true,
+			"steps": [
+				{
+					"name": "step1",
+					"status": "true"
+				},
+				{
+					"step": "step2",
+					"status": "true"
+				}
+			],
+			"excepted": true,
+			"actual": true,
+			"healthy": true
+		},
+		{
+			"name": "MyPay",
+			"direction": "Source",
+			"url": "http://mypay.cognizant.com",
+			"secure": false,
+			"steps": [
+				{
+					"name": "step1",
+					"status": true
+				},
+				{
+					"step": "step2",
+					"status": true
+				}
+			],
+			"excepted": true,
+			"actual": false,
+			"healthy": true
+		}
+	]
+}

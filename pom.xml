@@ -19,7 +19,7 @@
 	</parent>
 
 	<modules>
-	<module>healthcheck</module>
+	<module>healthcheck-server</module>
 	<module>healthcheck-ui</module>
 	</modules>
 
