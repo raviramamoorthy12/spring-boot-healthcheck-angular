@@ -104,17 +104,65 @@
 			</execution>
 		</executions>
 	</plugin>
- <!-- <plugin>
-            <groupId>com.spotify</groupId>
-            <artifactId>dockerfile-maven-plugin</artifactId>
-            <version>1.3.6</version>
-            <configuration>
-                <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                <buildArgs>
-                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                </buildArgs>
-            </configuration>
-        </plugin> -->
+ <plugin>
+  <groupId>io.fabric8</groupId>
+  <artifactId>docker-maven-plugin</artifactId>
+  <version>0.26.0</version>
+
+  <configuration>
+        <!--  <dockerHost>http://127.0.0.1:2375</dockerHost> -->        
+        <!--  this is for Mac and Amazon Linux -->
+        <!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
+
+        <verbose>true</verbose>
+        
+        <!-- Needed if pushing to DockerHub: preferred to store these in local environment (see the course) -->
+        <authConfig>
+			  <username>ravibharathii@gmail.com</username>
+              <password>ram12Padma</password>
+        </authConfig>
+        
+		<images>
+			<image>
+				<name>ravibharathii/healthcheck-server</name>
+				<build>
+					<dockerFileDir>${project.basedir}/src/main/docker/</dockerFileDir>
+
+                    <!--copies Jar to the maven directory (uses Assembly system)-->
+					<assembly>
+						<descriptorRef>artifact</descriptorRef>
+					</assembly>
+					<tags>
+						<tag>latest</tag>
+					</tags>
+				</build>
+			</image>
+		</images>
+	</configuration>
+
+  <!-- Connect start/stop to pre- and
+       post-integration-test phase, respectively if you want to start
+       your docker containers during integration tests -->
+  <!--  <executions>
+    <execution>
+       <id>start</id>
+       <phase>pre-integration-test</phase>
+       <goals> -->
+         <!-- "build" should be used to create the images with the
+              artifact -->
+        <!--   <goal>build</goal>
+         <goal>start</goal>
+       </goals>
+    </execution>
+    <execution>
+       <id>stop</id>
+       <phase>post-integration-test</phase>
+       <goals>
+         <goal>stop</goal>
+      </goals>
+    </execution>
+  </executions> -->
+</plugin>
 		</plugins>
 	</build>
 
