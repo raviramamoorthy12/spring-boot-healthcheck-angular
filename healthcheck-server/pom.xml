@@ -116,11 +116,7 @@
 
         <verbose>true</verbose>
         
-        <!-- Needed if pushing to DockerHub: preferred to store these in local environment (see the course) -->
-        <authConfig>
-			  <username>ravibharathii@gmail.com</username>
-              <password>ram12Padma</password>
-        </authConfig>
+       
         
 		<images>
 			<image>
@@ -139,6 +135,28 @@
 			</image>
 		</images>
 	</configuration>
+	
+	<executions>
+	<execution>
+	<phase>package</phase>
+	<goals>
+	<goal>build</goal>
+	<goal>push</goal>
+	</goals>
+	
+	</execution>
+	
+	<execution>
+	<id>mydeploy</id>
+	<phase>deploy</phase>
+	<goals>
+	
+	<goal>push</goal>
+	</goals>
+	
+	</execution>
+	
+	</executions>
 
   <!-- Connect start/stop to pre- and
        post-integration-test phase, respectively if you want to start
@@ -163,6 +181,13 @@
     </execution>
   </executions> -->
 </plugin>
+<plugin>
+<artifactId>maven-deploy-plugin</artifactId>
+<configuration>
+<skip>true</skip>
+</configuration>
+</plugin>
+
 		</plugins>
 	</build>
 
